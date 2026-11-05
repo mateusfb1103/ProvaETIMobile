@@ -1,9 +1,10 @@
 package com.provaetimobile
 
+import android.os.Bundle;
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate
-import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint.fabricEnabled
-import com.facebook.react.defaults.DefaultReactActivityDelegate
+// Removido os imports da Nova Arquitetura
+import com.facebook.react.ReactRootView // Adicione este import se necessário
 
 class MainActivity : ReactActivity() {
 
@@ -15,8 +16,20 @@ class MainActivity : ReactActivity() {
 
   /**
    * Returns the instance of the [ReactActivityDelegate]. We use [DefaultReactActivityDelegate]
-   * which allows you to enable New Architecture with a single boolean flags [fabricEnabled]
+   * which allows you to easily enable Fabric and Concurrent React (aka React 18) with two boolean
+   * flags.
    */
-  override fun createReactActivityDelegate(): ReactActivityDelegate =
-      DefaultReactActivityDelegate(this, mainComponentName, fabricEnabled)
+  override fun createReactActivityDelegate(): ReactActivityDelegate {
+    // Código simplificado sem a referência a Fabric
+    return object : ReactActivityDelegate(this, mainComponentName) {
+        // Este método é necessário para o react-native-screens
+        override fun createRootView(): ReactRootView {
+            return ReactRootView(this@MainActivity)
+        }
+    }
+  }
+
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(null)
+  }
 }

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = '192.168.132.109'; 
+const BASE_URL = 'http://localhost:8080';
 
 const api = axios.create({
   baseURL: BASE_URL,
@@ -20,5 +20,6 @@ export const getPerifericoById = (id) => api.get(`/perifericos/${id}`);
 export const createPeriferico = (data) => api.post('/perifericos', data);
 export const updatePeriferico = (id, data) => api.put(`/perifericos/${id}`, data);
 export const deletePeriferico = (id) => api.delete(`/perifericos/${id}`);
+export const getPerifericosByComputador = (computadorId) => api.get(`/perifericos/computador/${computadorId}`);
 
 export default api;
